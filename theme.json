@@ -1,0 +1,43 @@
+{
+  "version": 2,
+  "settings": {
+    "layout": {
+      "contentSize": "760px",
+      "wideSize": "1200px"
+    },
+    "color": {
+      "palette": [
+        {
+          "slug": "navy",
+          "color": "#0a1420",
+          "name": "Newtron Navy"
+        },
+        {
+          "slug": "ink",
+          "color": "#16232f",
+          "name": "Newtron Ink"
+        },
+        {
+          "slug": "green",
+          "color": "#8bc53f",
+          "name": "Newtron Green"
+        },
+        {
+          "slug": "green-dark",
+          "color": "#4f9a1e",
+          "name": "Newtron Green (Dark)"
+        },
+        {
+          "slug": "light",
+          "color": "#f6f8fa",
+          "name": "Newtron Light"
+        },
+        {
+          "slug": "white",
+          "color": "#ffffff",
+          "name": "White"
+        }
+      ]
+    }
+  }
+}

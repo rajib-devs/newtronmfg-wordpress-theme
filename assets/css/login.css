@@ -1,0 +1,62 @@
+:root{--ink:#16232f;--muted:#5c6b78;--muted-2:#8a97a3;--green:#8bc53f;--green-hover:#6da930;--green-dark:#4f9a1e;--navy:#0a1420;--line:#e3e8ec;--bg-light:#f4f7f5}
+html.login,body.login{height:100%}
+body.login{margin:0;background:var(--bg-light);font-family:'Poppins',Arial,Helvetica,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+body.login #wpadminbar{display:none}
+body.login *{box-sizing:border-box}
+
+.nt-login-wrap{min-height:100vh;display:grid;grid-template-columns:1fr 1fr}
+
+.nt-login-visual{position:relative;overflow:hidden;background:var(--navy)}
+.nt-login-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;transform:scale(1.03)}
+.nt-login-visual-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(10,20,32,.65) 0%,rgba(10,20,32,.9) 65%,rgba(10,20,32,.97) 100%)}
+.nt-login-visual-copy{position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;padding:clamp(40px,6vw,88px);max-width:580px}
+.nt-login-visual-copy .eyebrow{display:flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);font-weight:700;margin-bottom:18px}
+.nt-login-visual-copy .eyebrow:before{content:'';width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(139,197,63,.2)}
+.nt-login-visual-copy h2{color:#fff;font-size:clamp(28px,3.1vw,40px);line-height:1.18;letter-spacing:-.01em;margin:0 0 18px;font-weight:700}
+.nt-login-visual-copy p{color:#b9c4cd;font-size:16px;line-height:1.7;margin:0 0 30px}
+.nt-login-points{list-style:none;margin:0;padding:22px 0 0;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column;gap:14px}
+.nt-login-points li{color:#dde4e9;font-size:14.5px;font-weight:500;padding-left:26px;position:relative}
+.nt-login-points li:before{content:'';position:absolute;left:0;top:6px;width:8px;height:8px;border-radius:50%;background:var(--green)}
+
+.nt-login-panel{display:flex;align-items:center;justify-content:center;padding:40px 24px;background:var(--bg-light)}
+
+/* Native #login form, restyled as a card in the right panel */
+body.login div#login{width:100%;max-width:400px;margin:0;padding:44px 40px 40px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 24px 60px -20px rgba(10,20,32,.18),0 2px 8px rgba(10,20,32,.04)}
+body.login #login h1{margin:0 0 30px;padding:0}
+body.login #login h1 a{margin:0;display:block}
+body.login #login form{margin-top:22px;padding:0;background:transparent;border:0;box-shadow:none}
+body.login #loginform p.login-hero-title{display:none}
+body.login #login label{display:block;font-weight:600;font-size:13.5px;letter-spacing:.01em;color:var(--ink);margin-bottom:7px}
+body.login #login input[type=text],
+body.login #login input[type=password],
+body.login #login input[type=email]{width:100%;padding:12px 14px;border:1.5px solid #dde3e8;border-radius:9px;font:inherit;font-size:15px;box-shadow:none;background:#fbfcfd;transition:border-color .15s ease,background .15s ease,box-shadow .15s ease}
+body.login #login input[type=text]:focus,
+body.login #login input[type=password]:focus,
+body.login #login input[type=email]:focus{outline:none;border-color:var(--green);background:#fff;box-shadow:0 0 0 4px rgba(139,197,63,.16)}
+body.login .forgetmenot{display:flex;align-items:center;gap:8px;margin:2px 0 22px}
+body.login .forgetmenot label{margin:0;font-weight:500;font-size:14px;display:flex;align-items:center;gap:8px;cursor:pointer;color:var(--muted)}
+body.login .forgetmenot input{width:auto;margin:0;accent-color:var(--green)}
+body.login .submit{margin:0}
+body.login #wp-submit{width:100%;display:inline-flex;align-items:center;justify-content:center;padding:10px 20px;border-radius:8px;font-weight:600;font-size:14px;letter-spacing:.01em;border:1.5px solid transparent;cursor:pointer;background:var(--green);color:var(--navy);text-shadow:none;box-shadow:0 1px 2px rgba(10,20,32,.06);transition:background .15s ease,transform .15s ease,box-shadow .15s ease}
+body.login #wp-submit:hover{background:var(--green-hover);color:var(--navy);box-shadow:0 8px 18px -6px rgba(139,197,63,.55);transform:translateY(-1px)}
+body.login #wp-submit:active{transform:translateY(0)}
+body.login #wp-submit:focus{outline:none;box-shadow:0 0 0 4px rgba(139,197,63,.22)}
+body.login #nav,body.login #backtoblog{padding:0;margin-top:22px;text-align:left;font-size:0}
+body.login #nav{padding-top:18px;border-top:1px solid var(--line)}
+body.login #nav a,body.login #backtoblog a{color:var(--muted);font-size:13.5px;font-weight:500;text-decoration:none;transition:color .15s ease}
+body.login #nav a:hover,body.login #backtoblog a:hover{color:var(--green-dark)}
+body.login #backtoblog{margin-top:12px}
+body.login #backtoblog a{color:var(--muted-2)}
+body.login #login_error,body.login .message,body.login .success{border-left:0;background:#fdecea;border:1px solid #f3c2bd;color:#c0392b;font-size:13.5px;font-weight:500;padding:12px 14px;border-radius:9px;box-shadow:none;margin:0 0 22px}
+body.login .message{background:#eef8e4;border-color:#cfe8ae;color:var(--green-dark)}
+body.login .privacy-policy-page-link{margin-top:18px;text-align:left;font-size:0}
+body.login p.privacy-policy-page-link a{color:var(--muted-2);font-size:12.5px}
+
+@media(max-width:900px){
+.nt-login-wrap{grid-template-columns:1fr;min-height:0}
+.nt-login-visual{min-height:260px}
+.nt-login-visual-copy{padding:32px 24px}
+.nt-login-points{display:none}
+.nt-login-panel{padding:32px 20px 48px}
+body.login div#login{padding:36px 28px 32px;border-radius:16px}
+}
