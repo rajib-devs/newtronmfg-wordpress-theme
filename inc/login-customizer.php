@@ -33,7 +33,7 @@ function newtron_login_buffer_render(){
 	$img=get_theme_mod('newtron_login_bg_image',get_template_directory_uri().'/assets/images/industrial.jpg');
 	$eyebrow=get_theme_mod('newtron_login_eyebrow','Newtron MFG Portal');
 	$heading=get_theme_mod('newtron_login_heading','Precision manufacturing, managed in one place.');
-	$text=get_theme_mod('newtron_login_text','Track quotes, review orders, and stay in sync with our quality team — sign in to pick up where you left off.');
+	$text=get_theme_mod('newtron_login_text','Track quotes, review orders, and stay in sync with our quality team - sign in to pick up where you left off.');
 	$points_raw=get_theme_mod('newtron_login_points',"Real-time RFQ and order status\nDirect access to your account team\nSecure document and CAD file exchange");
 	$points='';
 	foreach(preg_split('/\r\n|\r|\n/',(string)$points_raw) as $point){

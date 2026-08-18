@@ -62,7 +62,7 @@ function newtron_customize_register($wp_customize){
 	$wp_customize->add_setting('newtron_login_heading',array('default'=>'Precision manufacturing, managed in one place.','sanitize_callback'=>'sanitize_text_field','transport'=>'refresh'));
 	$wp_customize->add_control('newtron_login_heading',array('label'=>'Heading','type'=>'text','section'=>'newtron_login_section'));
 
-	$wp_customize->add_setting('newtron_login_text',array('default'=>'Track quotes, review orders, and stay in sync with our quality team — sign in to pick up where you left off.','sanitize_callback'=>'sanitize_textarea_field','transport'=>'refresh'));
+	$wp_customize->add_setting('newtron_login_text',array('default'=>'Track quotes, review orders, and stay in sync with our quality team - sign in to pick up where you left off.','sanitize_callback'=>'sanitize_textarea_field','transport'=>'refresh'));
 	$wp_customize->add_control('newtron_login_text',array('label'=>'Description','type'=>'textarea','section'=>'newtron_login_section'));
 
 	$wp_customize->add_setting('newtron_login_points',array('default'=>"Real-time RFQ and order status\nDirect access to your account team\nSecure document and CAD file exchange",'sanitize_callback'=>'sanitize_textarea_field','transport'=>'refresh'));
