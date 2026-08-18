@@ -31,7 +31,7 @@ h2{font-size:clamp(28px,3.2vw,38px);line-height:1.2}
 .header-actions{display:flex;gap:10px;flex:none}
 .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 20px;border-radius:8px;font-weight:600;font-size:14px;border:1.5px solid transparent;cursor:pointer}
 .btn-primary{background:var(--green);color:var(--navy)}
-.btn-primary:hover{background:var(--green-hover);color:var(--navy)}
+.btn-primary:hover{background:var(--green-hover);color:#fff}
 .btn-outline{border-color:var(--line);color:var(--ink)}
 .btn-outline:hover{border-color:var(--ink);color:var(--ink)}
 .btn-blue{background:var(--green-dark);color:#fff}
