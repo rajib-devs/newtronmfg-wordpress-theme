@@ -379,7 +379,7 @@ input.is-invalid,textarea.is-invalid,select.is-invalid{border-color:#c0392b}
 .primary-nav a{font-size:16px}
 .nav-panel-header{display:flex;align-items:center;justify-content:space-between;width:100%;margin-bottom:8px}
 .header-actions{display:none}
-.mobile-nav-cta{display:flex;margin-top:8px;width:100%}
+.mobile-nav-cta{display:flex;flex-direction:column;gap:10px;margin-top:8px;width:100%}
 .mobile-nav-cta .btn{width:100%}
 .grid-3,.service-grid,.stats-grid{grid-template-columns:repeat(2,1fr)}
 .how-grid{grid-template-columns:1fr;row-gap:20px}
