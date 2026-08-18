@@ -2,7 +2,7 @@
 if(!defined('ABSPATH'))exit;
 function newtron_mfg_setup(){add_theme_support('title-tag');add_theme_support('post-thumbnails');add_theme_support('custom-logo');add_theme_support('html5',array('search-form','gallery','caption','style','script'));add_theme_support('align-wide');register_nav_menus(array('primary'=>'Primary Menu','footer'=>'Footer Menu'));}
 add_action('after_setup_theme','newtron_mfg_setup');
-function newtron_mfg_assets(){wp_enqueue_style('newtron-fonts','https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap',array(),null);wp_enqueue_style('newtron-style',get_stylesheet_uri(),array(),'1.0');wp_enqueue_style('newtron-main',get_template_directory_uri().'/assets/css/main.css',array('newtron-fonts'),'2.4');wp_enqueue_script('newtron-main',get_template_directory_uri().'/assets/js/main.js',array(),'1.8',true);wp_localize_script('newtron-main','NEWTRON_STATES',newtron_states());wp_localize_script('newtron-main','NEWTRON_REST',array('nonce'=>wp_create_nonce('wp_rest')));}
+function newtron_mfg_assets(){wp_enqueue_style('newtron-fonts','https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap',array(),null);wp_enqueue_style('newtron-style',get_stylesheet_uri(),array(),'1.0');wp_enqueue_style('newtron-main',get_template_directory_uri().'/assets/css/main.css',array('newtron-fonts'),'3.4');wp_enqueue_script('newtron-main',get_template_directory_uri().'/assets/js/main.js',array(),'1.9',true);wp_localize_script('newtron-main','NEWTRON_STATES',newtron_states());wp_localize_script('newtron-main','NEWTRON_REST',array('nonce'=>wp_create_nonce('wp_rest')));}
 add_action('wp_enqueue_scripts','newtron_mfg_assets');
 
 require get_template_directory().'/inc/rfq-post-type.php';

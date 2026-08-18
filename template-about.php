@@ -51,8 +51,8 @@
 </section>
 
 <section class="section-light">
-<div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px);align-items:center;padding:clamp(56px,7vw,88px) 0">
-<figure style="margin:0"><img src="<?php echo esc_url($img.'cnc-turning.jpg'); ?>" alt="Modern CNC production" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px"></figure>
+<div class="container mission-grid">
+<figure><img src="<?php echo esc_url($img.'cnc-turning.jpg'); ?>" alt="Modern CNC production"></figure>
 <div>
 <span class="eyebrow">Looking Forward</span>
 <h2>Engineering the Future of Manufacturing</h2>
@@ -95,6 +95,36 @@
 </div>
 
 </div>
+</div>
+</section>
+
+<section class="section-light">
+<div class="container mission-grid">
+<figure><img src="<?php echo esc_url($img.'about-us-mission.png'); ?>" alt="Diverse team joining hands together"></figure>
+<div>
+<span class="eyebrow">Our Mission</span>
+<h2>Through the Word, We Help Others Succeed</h2>
+<p class="entry-content">We encourage business leaders to build their organizations on Christian values of integrity, character, excellence, and service. We believe that honoring God in business leads to lasting success and a positive impact on others.</p>
+</div>
+</div>
+</section>
+
+<section class="section scripture-section">
+<div class="container">
+<div class="section-head">
+<span class="eyebrow">Guided by Scripture</span>
+</div>
+<div class="quote-grid">
+<blockquote class="quote-card">
+<p>&ldquo;Work willingly at whatever you do, as though you were working for the Lord rather than for people.&rdquo;</p>
+<cite>Ephesians 6:7</cite>
+</blockquote>
+<blockquote class="quote-card">
+<p>&ldquo;The Lord&rsquo;s servant must be kind to everyone, able to teach, and patient.&rdquo;</p>
+<cite>2 Timothy 2:24</cite>
+</blockquote>
+</div>
+<p class="scripture-note">These principles guide our team as we develop innovative business and communication solutions with honesty, professionalism, and a commitment to serving others.</p>
 </div>
 </section>
 
