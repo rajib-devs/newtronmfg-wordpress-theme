@@ -1,12 +1,13 @@
 <form class="card form-grid quote-form" method="post" action="<?php echo esc_url(rest_url('newtron/v1/rfq-submit')); ?>" enctype="multipart/form-data">
 <?php wp_nonce_field('newtron_rfq_submit','newtron_rfq_nonce'); ?>
 <div class="hp-field" aria-hidden="true"><label>Website<input type="text" name="rfq_website" tabindex="-1" autocomplete="off"></label></div>
+<input type="hidden" name="recaptcha_token" class="recaptcha-token" value="">
 <div class="full"><h3 class="form-section-title is-first">Contact &amp; Company Information</h3></div>
 <div><label>First Name <span class="req">*</span></label><input name="contact_first_name" required></div>
 <div><label>Last Name <span class="req">*</span></label><input name="contact_last_name" required></div>
 <div><label>Designation</label><input name="contact_designation"></div>
 <div><label>Company Name</label><input name="company_name"></div>
-<div class="full"><label>Country <span class="req">*</span></label><select name="company_country" class="country-select" required><option value="">Select a country…</option><?php echo newtron_country_options(); ?></select></div>
+<div class="full"><label>Country <span class="req">*</span></label><select class="country-select" disabled><option value="US" selected>United States (US)</option></select><input type="hidden" name="company_country" value="US"></div>
 <div class="full"><label>Street Address <span class="req">*</span></label><input name="company_address" required></div>
 <div><label>Town / City <span class="req">*</span></label><input name="company_city" required></div>
 <div><label>State / Province</label><select name="company_state" class="state-select"><option value="">Select a state…</option></select><input type="text" name="company_state" class="state-text" placeholder="State / Province" style="display:none"></div>

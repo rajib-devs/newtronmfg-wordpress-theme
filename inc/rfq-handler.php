@@ -164,6 +164,25 @@ function newtron_rfq_send_confirmation_email($post_id,$values){
 	wp_mail($values['contact_email'],$subject,$body);
 }
 
+function newtron_rfq_verify_recaptcha(){
+	if(!defined('NEWTRON_RECAPTCHA_SECRET_KEY')||!NEWTRON_RECAPTCHA_SECRET_KEY)return true;
+
+	$token=isset($_POST['recaptcha_token'])?sanitize_text_field(wp_unslash($_POST['recaptcha_token'])):'';
+	if(!$token)return false;
+
+	$response=wp_remote_post('https://www.google.com/recaptcha/api/siteverify',array(
+		'timeout'=>10,
+		'body'=>array('secret'=>NEWTRON_RECAPTCHA_SECRET_KEY,'response'=>$token,'remoteip'=>isset($_SERVER['REMOTE_ADDR'])?$_SERVER['REMOTE_ADDR']:''),
+	));
+	if(is_wp_error($response))return false;
+
+	$body=json_decode(wp_remote_retrieve_body($response),true);
+	if(empty($body['success']))return false;
+	if(isset($body['score'])&&$body['score']<0.5)return false;
+
+	return true;
+}
+
 function newtron_rfq_process_submit(){
 	if(empty($_POST['newtron_rfq_nonce'])||!wp_verify_nonce($_POST['newtron_rfq_nonce'],'newtron_rfq_submit')){
 		return array('success'=>false,'data'=>array('message'=>'Security check failed. Please refresh the page and try again.'));
@@ -172,6 +191,10 @@ function newtron_rfq_process_submit(){
 	// Honeypot: bots tend to fill every field. Respond as if successful without processing.
 	if(!empty($_POST['rfq_website'])){
 		return array('success'=>true,'data'=>array('message'=>'Thanks - your request has been submitted. Our team will follow up shortly.'));
+	}
+
+	if(!newtron_rfq_verify_recaptcha()){
+		return array('success'=>false,'data'=>array('message'=>'We could not verify your submission. Please refresh the page and try again.'));
 	}
 
 	$values=array();

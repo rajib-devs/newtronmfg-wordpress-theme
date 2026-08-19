@@ -123,11 +123,7 @@ const qNote=form.querySelector('.form-note');
 const qError=form.querySelector('.form-error');
 const qSubmitBtn=form.querySelector('button[type=submit], button:not([type])');
 const qSubmitLabel=qSubmitBtn?qSubmitBtn.textContent:'';
-form.addEventListener('submit',e=>{
-	e.preventDefault();
-	if(qNote)qNote.hidden=true;
-	if(qError)qError.hidden=true;
-	if(qSubmitBtn){qSubmitBtn.disabled=true;qSubmitBtn.classList.add('is-loading');qSubmitBtn.textContent='Saving...';}
+function submitQuoteForm(){
 	fetch(form.getAttribute('action'),{method:'POST',headers:typeof NEWTRON_REST!=='undefined'?{'X-WP-Nonce':NEWTRON_REST.nonce}:{},body:new FormData(form)})
 		.then(res=>res.json())
 		.then(data=>{
@@ -152,6 +148,23 @@ form.addEventListener('submit',e=>{
 			if(qError){qError.textContent='Something went wrong submitting your request. Please try again.';qError.hidden=false;}
 		})
 		.finally(()=>{if(qSubmitBtn){qSubmitBtn.disabled=false;qSubmitBtn.classList.remove('is-loading');qSubmitBtn.textContent=qSubmitLabel;}});
+}
+form.addEventListener('submit',e=>{
+	e.preventDefault();
+	if(qNote)qNote.hidden=true;
+	if(qError)qError.hidden=true;
+	if(qSubmitBtn){qSubmitBtn.disabled=true;qSubmitBtn.classList.add('is-loading');qSubmitBtn.textContent='Saving...';}
+	const tokenField=form.querySelector('.recaptcha-token');
+	if(typeof grecaptcha!=='undefined'&&typeof NEWTRON_RECAPTCHA!=='undefined'){
+		grecaptcha.ready(()=>{
+			grecaptcha.execute(NEWTRON_RECAPTCHA.siteKey,{action:'submit_quote'}).then(token=>{
+				if(tokenField)tokenField.value=token;
+				submitQuoteForm();
+			}).catch(submitQuoteForm);
+		});
+	}else{
+		submitQuoteForm();
+	}
 });
 
 const STATES=typeof NEWTRON_STATES!=='undefined'?NEWTRON_STATES:{};
