@@ -18,6 +18,7 @@ require get_template_directory().'/inc/rfq-post-type.php';
 require get_template_directory().'/inc/rfq-settings.php';
 require get_template_directory().'/inc/rfq-handler.php';
 require get_template_directory().'/inc/login-customizer.php';
+require get_template_directory().'/inc/contact-spam-protection.php';
 // Prevent CF7 from auto-wrapping form-tag lines in <p>/<br> via wpautop, which was causing extra vertical gaps in the grid layout.
 add_filter('wpcf7_autop_or_not','__return_false');
 function newtron_default_menu(){
