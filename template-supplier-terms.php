@@ -14,7 +14,24 @@
 
 <div class="policy-grid">
 
-<nav class="policy-toc" data-toc>
+<div class="policy-toc-wrap" data-toc-wrap>
+
+<button type="button" class="toc-fab" data-toc-toggle aria-expanded="false" aria-controls="policy-toc-list" aria-label="Open table of contents">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="17" x2="14" y2="17"></line></svg>
+<span class="toc-fab-label">Contents</span>
+</button>
+
+<div class="toc-backdrop" data-toc-close></div>
+
+<div class="toc-sheet">
+<div class="toc-sheet-header">
+<span class="toc-toggle-text">
+<span class="toc-toggle-eyebrow">On This Page</span>
+<span class="toc-toggle-current" data-toc-current>Quality Requirements</span>
+</span>
+<button type="button" class="toc-sheet-close" data-toc-close aria-label="Close table of contents">&times;</button>
+</div>
+<nav class="policy-toc" data-toc id="policy-toc-list">
 <span class="toc-label">On This Page</span>
 <a href="#quality-requirements" class="is-active">Quality Requirements</a>
 <a href="#material-certifications">Material Certifications</a>
@@ -30,6 +47,8 @@
 <a href="#indemnification">Indemnification</a>
 <a href="#governing-law">Governing Law</a>
 </nav>
+</div>
+</div>
 
 <div class="policy-sections">
 
