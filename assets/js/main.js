@@ -10,11 +10,13 @@ if(backdrop)backdrop.addEventListener('click',closeNav);
 const siteHeader=document.querySelector('.site-header');
 if(siteHeader){
 	let lastY=window.scrollY;
+	const scrollThreshold=8;
 	window.addEventListener('scroll',()=>{
 		if(panel&&panel.classList.contains('open'))return;
 		const y=window.scrollY;
-		const goingDown=y>lastY;
-		siteHeader.classList.toggle('header-hidden',goingDown&&y>96);
+		const delta=y-lastY;
+		if(Math.abs(delta)<scrollThreshold)return;
+		siteHeader.classList.toggle('header-hidden',delta>0&&y>96);
 		lastY=y;
 	},{passive:true});
 }
