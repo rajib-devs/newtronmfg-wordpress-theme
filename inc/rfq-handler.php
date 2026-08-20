@@ -121,47 +121,77 @@ function newtron_rfq_handle_uploads($post_id,$field='cad_files',$debug_meta='_rf
 	return $saved;
 }
 
+function newtron_rfq_generate_number(){
+	global $wpdb;
+	$today=current_time('Ymd');
+	$option='newtron_rfq_seq_'.$today;
+
+	// Atomic per-day counter: INSERT..ON DUPLICATE KEY UPDATE avoids a race between separate read/write calls.
+	$wpdb->query($wpdb->prepare(
+		"INSERT INTO {$wpdb->options} (option_name, option_value, autoload) VALUES (%s, 1, 'no') ON DUPLICATE KEY UPDATE option_value = option_value + 1",
+		$option
+	));
+	$seq=(int)$wpdb->get_var($wpdb->prepare("SELECT option_value FROM {$wpdb->options} WHERE option_name = %s",$option));
+	if($seq<1)$seq=1;
+
+	// Sequence rolls A0001..A9999, then B0001..B9999, etc (AA0001 if a single day ever exceeds Z9999).
+	$letter_index=intdiv($seq-1,9999);
+	$digits=(($seq-1)%9999)+1;
+	$letter='';
+	$n=$letter_index;
+	do{
+		$letter=chr(65+($n%26)).$letter;
+		$n=intdiv($n,26)-1;
+	}while($n>=0);
+
+	return $today.'-'.$letter.sprintf('%04d',$digits);
+}
+
 function newtron_rfq_send_notification_email($post_id,$values,$files){
 	$to=newtron_rfq_notification_email();
 	if(!$to)return;
 
 	$who=$values['company_name']?:trim($values['contact_first_name'].' '.$values['contact_last_name']);
-	$subject=sprintf('[RFQ] New request from %s',$who);
+	$rfq_number=get_post_meta($post_id,'_rfq_number',true);
+	$subject=sprintf('[RFQ %s] New request from %s',$rfq_number,$who);
 
-	$lines=array();
-	$lines[]='A new RFQ was submitted on '.get_bloginfo('name').'.';
-	$lines[]='';
+	$site_name=esc_html(get_bloginfo('name'));
+	$dashboard_url=admin_url('admin.php?page=newtron-rfq-view&rfq_id='.$post_id);
 
-	foreach(newtron_rfq_field_defs() as $group){
-		$lines[]=$group['title'].':';
-		foreach($group['fields'] as $key=>$def){
-			if($values[$key]==='')continue;
-			$lines[]='- '.$def['label'].': '.$values[$key];
-		}
-		$lines[]='';
-	}
+	$logo_url='https://newtronstaging.rajibs.com/wp-content/uploads/2026/07/newtronmfg-white-logo.png';
 
-	if($files){
-		$lines[]='Files:';
-		foreach($files as $i=>$file){
-			$url=add_query_arg(array('action'=>'newtron_rfq_download','rfq_id'=>$post_id,'file'=>$i,'token'=>$file['token']),admin_url('admin-post.php'));
-			$lines[]='- '.$file['name'].' ('.size_format($file['size']).'): '.$url;
-		}
-		$lines[]='';
-	}
+	ob_start();
+	include get_template_directory().'/template-parts/emails/rfq-admin-notification-email.php';
+	$body=ob_get_clean();
 
-	$lines[]='View in dashboard: '.admin_url('admin.php?page=newtron-rfq-view&rfq_id='.$post_id);
-	wp_mail($to,$subject,implode("\n",$lines));
+	add_filter('wp_mail_content_type','newtron_rfq_mail_content_type');
+	wp_mail($to,$subject,$body);
+	remove_filter('wp_mail_content_type','newtron_rfq_mail_content_type');
 }
 
-function newtron_rfq_send_confirmation_email($post_id,$values){
+function newtron_rfq_mail_content_type(){
+	return 'text/html';
+}
+
+function newtron_rfq_send_confirmation_email($post_id,$values,$files=array()){
 	if(empty($values['contact_email'])||!is_email($values['contact_email']))return;
 
 	$name=trim($values['contact_first_name'].' '.$values['contact_last_name'])?:'there';
+	$rfq_number=get_post_meta($post_id,'_rfq_number',true);
 	$subject='We received your quote request - '.get_bloginfo('name');
-	$project=$values['project_name']?' for "'.$values['project_name'].'"':'';
-	$body="Hi {$name},\n\nThanks for your quote request{$project}. Our team has received it and will follow up shortly.\n\nIf you have any questions in the meantime, just reply to this email.\n\n".get_bloginfo('name');
+
+	$site_name=esc_html(get_bloginfo('name'));
+	$site_url=home_url('/');
+	$logo_url='https://newtronstaging.rajibs.com/wp-content/uploads/2026/07/newtronmfg-white-logo.png';
+	if(!is_array($files))$files=array();
+
+	ob_start();
+	include get_template_directory().'/template-parts/emails/rfq-visitor-confirmation-email.php';
+	$body=ob_get_clean();
+
+	add_filter('wp_mail_content_type','newtron_rfq_mail_content_type');
 	wp_mail($values['contact_email'],$subject,$body);
+	remove_filter('wp_mail_content_type','newtron_rfq_mail_content_type');
 }
 
 function newtron_rfq_verify_recaptcha(){
@@ -237,6 +267,9 @@ function newtron_rfq_process_submit(){
 		return array('success'=>false,'data'=>array('message'=>'Something went wrong saving your request. Please try again.'));
 	}
 
+	$rfq_number=newtron_rfq_generate_number();
+	update_post_meta($post_id,'_rfq_number',$rfq_number);
+
 	foreach($values as $key=>$val){
 		update_post_meta($post_id,'_rfq_'.$key,$val);
 	}
@@ -249,9 +282,12 @@ function newtron_rfq_process_submit(){
 	$file_warnings=get_post_meta($post_id,'_rfq_upload_debug',true);
 
 	newtron_rfq_send_notification_email($post_id,$values,$files);
-	newtron_rfq_send_confirmation_email($post_id,$values);
+	newtron_rfq_send_confirmation_email($post_id,$values,$files);
 
-	$response=array('message'=>'Thanks - your request has been submitted. Our team will follow up shortly.');
+	$response=array(
+		'message'=>'Thanks - your request has been submitted. Your RFQ number is '.$rfq_number.'. Our team will follow up shortly.',
+		'rfq_number'=>$rfq_number,
+	);
 	if(is_array($file_warnings)&&$file_warnings){
 		$response['file_warnings']=$file_warnings;
 	}

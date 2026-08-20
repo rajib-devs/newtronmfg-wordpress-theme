@@ -156,6 +156,12 @@ add_action('init','newtron_rfq_seed_status_terms',20);
 
 function newtron_rfq_admin_columns($columns){
 	unset($columns['date']);
+	$ordered=array();
+	foreach($columns as $key=>$label){
+		$ordered[$key]=$label;
+		if($key==='cb')$ordered['rfq_number']='RFQ #';
+	}
+	$columns=$ordered;
 	$columns['rfq_company']='Company';
 	$columns['rfq_contact']='Contact';
 	$columns['rfq_email']='Email';
@@ -192,10 +198,13 @@ function newtron_rfq_render_view_page(){
 	$terms=wp_get_object_terms($post_id,'rfq_status');
 	$status=!empty($terms)&&!is_wp_error($terms)?$terms[0]->name:'-';
 
+	$rfq_number=get_post_meta($post_id,'_rfq_number',true);
+
 	echo '<div class="wrap">';
-	echo '<h1>'.esc_html($post->post_title).'</h1>';
+	echo '<h1>'.esc_html($post->post_title).($rfq_number?' <span style="font-weight:400;color:#646970">('.esc_html($rfq_number).')</span>':'').'</h1>';
 	echo '<p><a href="'.esc_url(admin_url('edit.php?post_type=rfq_request')).'">&larr; Back to RFQ Requests</a> &nbsp;|&nbsp; <a href="'.esc_url(get_edit_post_link($post_id)).'">Edit this RFQ</a></p>';
 	echo '<table class="widefat" style="max-width:600px;margin-bottom:20px"><tbody>';
+	echo '<tr><th style="width:220px;text-align:left">RFQ Number</th><td>'.esc_html($rfq_number?:'-').'</td></tr>';
 	echo '<tr><th style="width:220px;text-align:left">Quote Status</th><td>'.esc_html($status).'</td></tr>';
 	echo '<tr><th style="text-align:left">Submitted</th><td>'.esc_html(get_the_date('',$post_id)).'</td></tr>';
 	echo '</tbody></table>';
@@ -253,6 +262,9 @@ function newtron_rfq_render_view_page(){
 
 function newtron_rfq_admin_column_content($column,$post_id){
 	switch($column){
+		case 'rfq_number':
+			echo esc_html(get_post_meta($post_id,'_rfq_number',true)?:'-');
+			break;
 		case 'rfq_company':
 			echo esc_html(get_post_meta($post_id,'_rfq_company_name',true)?:'-');
 			break;
@@ -301,6 +313,11 @@ function newtron_rfq_render_meta_box($post){
 
 	$lead_time_options=array(''=>'- Select -','express'=>'Express (2 weeks)','standard'=>'Standard (4 weeks)','economy'=>'Economy (6–8 weeks)');
 	$date_fields=array('start_date','target_delivery_date');
+
+	$rfq_number=get_post_meta($post->ID,'_rfq_number',true);
+	if($rfq_number){
+		echo '<table class="widefat striped"><tbody><tr><th style="width:220px;text-align:left">RFQ Number</th><td><strong>'.esc_html($rfq_number).'</strong></td></tr></tbody></table>';
+	}
 
 	$defs=newtron_rfq_field_defs();
 	foreach($defs as $group){

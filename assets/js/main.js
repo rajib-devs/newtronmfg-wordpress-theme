@@ -153,7 +153,7 @@ form.addEventListener('submit',e=>{
 	e.preventDefault();
 	if(qNote)qNote.hidden=true;
 	if(qError)qError.hidden=true;
-	if(qSubmitBtn){qSubmitBtn.disabled=true;qSubmitBtn.classList.add('is-loading');qSubmitBtn.textContent='Saving...';}
+	if(qSubmitBtn){qSubmitBtn.disabled=true;qSubmitBtn.classList.add('is-loading');qSubmitBtn.textContent='Sending...';}
 	const tokenField=form.querySelector('.recaptcha-token');
 	if(typeof grecaptcha!=='undefined'&&typeof NEWTRON_RECAPTCHA!=='undefined'){
 		grecaptcha.ready(()=>{
