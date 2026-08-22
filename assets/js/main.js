@@ -1,13 +1,13 @@
 document.addEventListener('touchstart',()=>{},{passive:true});
 document.addEventListener('DOMContentLoaded',()=>{
 const toggle=document.querySelector('[data-nav-toggle]'),closeBtn=document.querySelector('[data-nav-close]'),panel=document.querySelector('[data-nav-panel]'),backdrop=document.querySelector('[data-nav-backdrop]');
-const openNav=()=>{if(panel)panel.classList.add('open');if(backdrop)backdrop.classList.add('is-open');document.body.style.overflow='hidden';};
-const closeNav=()=>{if(panel)panel.classList.remove('open');if(backdrop)backdrop.classList.remove('is-open');document.body.style.overflow='';};
+const siteHeader=document.querySelector('.site-header');
+const openNav=()=>{if(siteHeader)siteHeader.classList.remove('header-hidden');if(panel)panel.classList.add('open');if(backdrop)backdrop.classList.add('is-open');document.body.classList.add('nav-open');document.body.style.overflow='hidden';};
+const closeNav=()=>{if(panel)panel.classList.remove('open');if(backdrop)backdrop.classList.remove('is-open');document.body.classList.remove('nav-open');document.body.style.overflow='';};
 if(toggle&&panel)toggle.addEventListener('click',()=>{panel.classList.contains('open')?closeNav():openNav();});
 if(closeBtn)closeBtn.addEventListener('click',closeNav);
 if(backdrop)backdrop.addEventListener('click',closeNav);
 
-const siteHeader=document.querySelector('.site-header');
 if(siteHeader){
 	let lastY=window.scrollY;
 	const scrollThreshold=8;
