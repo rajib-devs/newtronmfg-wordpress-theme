@@ -33,8 +33,11 @@ h2{font-size:clamp(28px,3.2vw,38px);line-height:1.2}
 .btn-primary{background:var(--green);color:var(--navy)}
 .btn-outline{border-color:var(--line);color:var(--ink)}
 .btn-blue{background:var(--green-dark);color:#fff}
+.btn-primary:active{background:var(--green-hover);color:var(--navy)}
+.btn-outline:active{border-color:var(--ink);color:var(--ink)}
+.btn-blue:active{background:var(--green-hover);color:#fff}
 @media(hover:hover){
-.btn-primary:hover{background:var(--green-hover);color:#fff}
+.btn-primary:hover{background:var(--green-hover);color:var(--navy)}
 .btn-outline:hover{border-color:var(--ink);color:var(--ink)}
 .btn-blue:hover{background:var(--green-hover)}
 }
