@@ -1,3 +1,4 @@
+document.addEventListener('touchstart',()=>{},{passive:true});
 document.addEventListener('DOMContentLoaded',()=>{
 const toggle=document.querySelector('[data-nav-toggle]'),closeBtn=document.querySelector('[data-nav-close]'),panel=document.querySelector('[data-nav-panel]'),backdrop=document.querySelector('[data-nav-backdrop]');
 const openNav=()=>{if(panel)panel.classList.add('open');if(backdrop)backdrop.classList.add('is-open');document.body.style.overflow='hidden';};

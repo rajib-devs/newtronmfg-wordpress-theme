@@ -12,6 +12,7 @@ function newtron_login_enqueue(){
 	wp_enqueue_style('newtron-login',get_template_directory_uri().'/assets/css/login.css',array('newtron-fonts'),'1.4');
 	$logo=get_template_directory_uri().'/assets/images/logo.png';
 	echo '<style>#login h1 a,.login h1 a{background-image:url('.esc_url($logo).');width:220px;height:56px;background-size:contain;background-position:center;background-repeat:no-repeat}</style>';
+	echo '<script>document.addEventListener("touchstart",()=>{},{passive:true});</script>';
 }
 add_action('login_enqueue_scripts','newtron_login_enqueue');
 
