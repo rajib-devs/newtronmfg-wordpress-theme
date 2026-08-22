@@ -9,10 +9,9 @@ if(!defined('ABSPATH'))exit;
 
 function newtron_login_enqueue(){
 	wp_enqueue_style('newtron-fonts','https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap',array(),null);
-	wp_enqueue_style('newtron-login',get_template_directory_uri().'/assets/css/login.css',array('newtron-fonts'),'1.3');
+	wp_enqueue_style('newtron-login',get_template_directory_uri().'/assets/css/login.css',array('newtron-fonts'),'1.4');
 	$logo=get_template_directory_uri().'/assets/images/logo.png';
 	echo '<style>#login h1 a,.login h1 a{background-image:url('.esc_url($logo).');width:220px;height:56px;background-size:contain;background-position:center;background-repeat:no-repeat}</style>';
-	echo '<script>if(!("ontouchstart" in window)&&!(navigator.maxTouchPoints>0)){document.documentElement.classList.add("has-hover");}</script>';
 }
 add_action('login_enqueue_scripts','newtron_login_enqueue');
 

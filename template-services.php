@@ -18,7 +18,7 @@
 <div class="grid-4">
 
 <div class="tex-card"><div class="tex-overlay"></div>
-<img class="tex-card-media" src="<?php echo esc_url($img.'3d-printing.jpg'); ?>" alt="Engineering">
+<img class="tex-card-media" src="<?php echo esc_url($img.'Engineering1.jpg'); ?>" alt="Engineering">
 <div class="tex-card-body"><div class="tc-title">Engineering</div><p>3D CAD design and documentation, design-for-manufacturing (DFM).</p></div>
 </div>
 
@@ -38,7 +38,7 @@
 </div>
 
 <div class="tex-card"><div class="tex-overlay"></div>
-<img class="tex-card-media" src="<?php echo esc_url($img.'gears-mach.jpg'); ?>" alt="Prototype and Production Manufacturing">
+<img class="tex-card-media" src="<?php echo esc_url($img.'Proto-low-pro1.jpg'); ?>" alt="Prototype and Production Manufacturing">
 <div class="tex-card-body"><div class="tc-title">Prototype and Production Manufacturing</div><p>Prototype, short-run, and production manufacturing with consistent quality throughout the entire order.</p></div>
 </div>
 

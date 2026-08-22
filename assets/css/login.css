@@ -40,7 +40,7 @@ body.login .submit{margin:0}
 body.login #wp-submit{width:100%;display:inline-flex;align-items:center;justify-content:center;padding:10px 20px;border-radius:8px;font-weight:600;font-size:14px;letter-spacing:.01em;border:1.5px solid transparent;cursor:pointer;background:var(--green);color:var(--navy);text-shadow:none;box-shadow:0 1px 2px rgba(10,20,32,.06);transition:background .15s ease,transform .15s ease,box-shadow .15s ease;-webkit-tap-highlight-color:transparent}
 body.login #wp-submit:active{transform:translateY(0)}
 body.login #wp-submit:focus{outline:none;box-shadow:0 0 0 4px rgba(139,197,63,.22)}
-html.has-hover body.login #wp-submit:hover{background:var(--green-hover);color:#fff;box-shadow:0 8px 18px -6px rgba(139,197,63,.55);transform:translateY(-1px)}
+@media(hover:hover){body.login #wp-submit:hover{background:var(--green-hover);color:#fff;box-shadow:0 8px 18px -6px rgba(139,197,63,.55);transform:translateY(-1px)}}
 body.login #nav,body.login #backtoblog{padding:0;margin-top:22px;text-align:left;font-size:0}
 body.login #nav{padding-top:18px;border-top:1px solid var(--line)}
 body.login #nav a,body.login #backtoblog a{color:var(--muted);font-size:13.5px;font-weight:500;text-decoration:none;transition:color .15s ease}
